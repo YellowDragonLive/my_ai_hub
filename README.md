@@ -1,0 +1,236 @@
+# AI Hub Skills
+
+本项目包含多种 AI 技能（Fabric Patterns），以下是所有技能的中文介绍：
+
+| 技能 ID | 介绍 |
+| :--- | :--- |
+| `agility_story` | 敏捷用户故事：根据主题生成用户故事和验收标准（JSON 格式）。 |
+| `ai` | 智能问答：深入解读问题并提供简洁、深刻的 Markdown 列表回答。 |
+| `analyze_answers` | 分析答案：基于学习目标和生成的测试题评估答案准确性。 |
+| `analyze_bill` | 分析提案：分析立法内容以识别显性和隐性目标，检查隐藏议程。 |
+| `analyze_bill_short` | 分析提案（简版）：简要分析立法内容，识别主要目标和意图。 |
+| `analyze_candidates` | 候选人对比：对比两名政治候选人在关键议题和政策上的异同。 |
+| `analyze_cfp_submission` | 分析投稿：根据清晰度、相关性、深度和吸引力评估会议演讲投稿。 |
+| `analyze_claims` | 事实核查：分析并评定事实主张，提供证据、反驳论点和建议。 |
+| `analyze_comments` | 分析评论：评估网络评论内容，分类情感并识别赞美或批评的原因。 |
+| `analyze_debate` | 辩论分析：评定辩论的深刻程度和情感，呈现公正的论点分析。 |
+| `analyze_email_headers` | 分析邮件头：提供邮件头的网络安全分析，检查 SPF/DKIM/DMARC 等。 |
+| `analyze_incident` | 分析事件：从网络安全漏洞文章中梳理关键细节（攻击类型、补救等）。 |
+| `analyze_interviewer_techniques` | 采访技巧分析：分析采访者的独特质感和脱颖而出的原因。 |
+| `analyze_logs` | 日志分析：分析服务器日志以识别模式、异常和性能改进建议。 |
+| `analyze_malware` | 恶意软件分析：分析详情，提取指标和技术，总结检测策略。 |
+| `analyze_military_strategy` | 军事战略分析：深入分析历史战役的战略决策、优缺点和后果。 |
+| `analyze_mistakes` | 错误分析：分析过去的思维错误，映射到当前信念并改进预测准确性。 |
+| `analyze_paper` | 论文分析：总结研究发现，评估严谨性和质量，提供评审见解。 |
+| `analyze_paper_simple` | 论文分析（简单）：关注主要发现、研究质量和研究设计。  |
+| `analyze_patent` | 专利分析：详细分析专利领域、问题、方案、新颖性和优点。 |
+| `analyze_personality` | 人格分析：对输入对象进行深度心理分析，关注行为、语言和特质。 |
+| `analyze_presentation` | 演示分析：评审演示内容、演说者目标、自我关注度和娱乐价值。 |
+| `analyze_product_feedback` | 产品反馈分析：识别主题，整合相似意见并按实用性排序。 |
+| `analyze_proposition` | 分析提案主张：识别目的、影响、支持与反对论点及背景。 |
+| `analyze_prose` | 散文分析：评估写作的新颖性、清晰度，并提供评分和改进建议。 |
+| `analyze_prose_json` | 散文分析 (JSON)：以 JSON 格式提供写作的新颖性、清晰度评估和评分。 |
+| `analyze_prose_pinker` | Pinker 散文分析：基于《风格感觉》评估写作风格和清晰度。 |
+| `analyze_risk` | 风险评估：对第三方供应商进行风险评估并给出安全控制建议。 |
+| `analyze_sales_call` | 销售电话分析：跨维度评分销售表现并提供可操作的反馈。 |
+| `analyze_spiritual_text` | 分析精神文本：对比精神文本，分析主张以及与圣经的区别。 |
+| `analyze_tech_impact` | 技术影响分析：分析技术的社会影响、伦理考虑和可持续性。 |
+| `analyze_terraform_plan` | Terraform 计划分析：评估基础设施变更、安全风险和成本影响。 |
+| `analyze_threat_report` | 威胁报告分析：提取洞察、趋势、引用并提供行动建议。 |
+| `analyze_threat_report_cmds` | 提取终端命令：从安全材料中合成可执行的命令行工具和专家见解。 |
+| `analyze_threat_report_trends` | 提取威胁趋势：提取网络安全报告中高达 50 条的洞察趋势。 |
+| `answer_interview_question` | 回答面试题：生成简练、量身定制的技术面试回答。 |
+| `apply_ul_tags` | 内容打标：应用标准化的内容标签（AI、安全、政治、文化等）。 |
+| `ask_secure_by_design_questions` | 安全设计提问：生成安全焦点问题，确保项目从设计阶段就安全。 |
+| `ask_uncle_duke` | Duke 叔叔：协调 AI 代理团队研究软件方案并进行代码评审。 |
+| `capture_thinkers_work` | 思想家研究：分析哲学家及其教导、背景、作品和建议。 |
+| `check_agreement` | 检查协议：分析合同以识别重要条款、问题和潜在陷阱。 |
+| `clean_text` | 文本清洗：纠正断行、标点、大小写和段落而不改变原意。 |
+| `coding_master` | 编程大师：向初学者解释编程概念，提供示例和深刻见解。 |
+| `compare_and_contrast` | 对比分析：在 Markdown 表格中对比不同项目的特征。 |
+| `concall_summary` | 财报会总结：提取管理层评论、问答、财务洞察和风险。 |
+| `convert_to_markdown` | 转为 Markdown：将内容转换为干净、完整的 Markdown 格式。 |
+| `create_5_sentence_summary` | 五级深度总结：创建从 5 个词到 1 个词不同深度的总结。 |
+| `create_academic_paper` | 创建学术论文：生成高质量、结构化的 LaTeX 格式论文。 |
+| `create_ai_jobs_analysis` | AI 就业分析：分析自动化对职业的影响并提供适应策略。 |
+| `create_aphorisms` | 创建金句：寻找并生成简短、机智的陈述列表。 |
+| `create_art_prompt` | 美术提示词：生成详细的视觉描述和 AI 绘图指令。 |
+| `create_better_frame` | 视角重构：识别并分析解析现实的不同框架，强调积极视角。 |
+| `create_coding_feature` | 创建编码功能：生成安全且可组合的代码功能。 |
+| `create_coding_project` | 创建编码项目：生成任何编码创意的原型图和启动代码。 |
+| `create_command` | 创建安全命令：根据目标描述确定渗透测试工具的正确参数。 |
+| `create_conceptmap` | 创建概念图：将非结构化文本转换为 Vis.js 交互式概念图。 |
+| `create_cyber_summary` | 网络安全总结：总结威胁、漏洞和事件的核心要点。 |
+| `create_design_document` | 创建设计文档：使用 C4 模型创建详细的系统设计文档。 |
+| `create_diy` | 创建 DIY 教程：组织需求并提供详细的步骤说明。 |
+| `create_excalidraw_visualization` | Excalidraw 可视化：创建复杂图表以可视化概念间的关系。 |
+| `create_flash_cards` | 创建闪卡：为关键概念和定义创建问答格式的教育闪卡。 |
+| `create_formal_email` | 创建正式邮件：撰写专业、得体、结构清晰的正式邮件。 |
+| `create_git_diff_commit` | 创建 Git 提交信息：根据变更生成符合规范的提交命令和消息。 |
+| `create_graph_from_input` | 创建进度图表：根据安全程序数据生成 CSV 进度数据。 |
+| `create_hormozi_offer` | Hormozi 报价方案：基于《$100M Offers》原则定制商业报价。 |
+| `create_idea_compass` | 点子指南针：探索定义的结构、证据、来源和后果。 |
+| `create_investigation_visualization` | 调查可视化：创建详细的 Graphviz 图表以进行调查分析。 |
+| `create_keynote` | 创建演讲稿：创建 TED 风格的、叙事性强的演说稿和备注。 |
+| `create_loe_document` | 创建工作量估算：为任务或项目估算工作量、资源和成本。 |
+| `create_logo` | 创建 Logo：为极简公司 Logo 生成无文字的 AI 绘图提示词。 |
+| `create_markmap_visualization` | MarkMap 可视化：将复杂点子转换为清晰的思维导图图表。 |
+| `create_mermaid_visualization` | Mermaid 可视化：使用 Mermaid 语法创建详细的概念图表。 |
+| `create_mermaid_visualization_for_github` | GitHub Mermaid：为 GitHub 文档优化 Mermaid 图表。 |
+| `create_micro_summary` | 微缩总结：将内容总结为简洁的 20 字总结和要点。 |
+| `create_mnemonic_phrases` | 创建助记词：创建有助于记忆的助记句子。 |
+| `create_network_threat_landscape` | 网络威胁分析：分析扫描出的端口并生成安全报告。 |
+| `create_newsletter_entry` | 创建周报条目：将文章冷缩为客观、简洁的周报风格总结。 |
+| `create_npc` | 创建 NPC：生成详细的 D&D 5E NPC（背景、属性、特质）。 |
+| `create_pattern` | 创建 AI 模式：将 AI 提示词提取并格式化为结构化部分。 |
+| `create_prd` | 创建 PRD：根据输入创建精确的 Markdown 格式产品需求文档。 |
+| `create_prediction_block` | 提取预测块：从输入中提取预测并格式化为博客模块。 |
+| `create_quiz` | 创建测验：创建三阶段阅读计划或主题测验。 |
+| `create_reading_plan` | 创建阅读计划：基于学习目标生成复习问题和阅读建议。 |
+| `create_recursive_outline` | 递归大纲：将复杂任务分解为可管理的层级化组件。 |
+| `create_report_finding` | 创建报告发现：创建结构详细的项目安全发现报告。 |
+| `create_rpg_summary` | RPG 总结：总结跑团会话的关键事件、战斗和统计。 |
+| `create_security_update` | 安全更新：为周报创建关于威胁、通告和漏洞的简要更新。 |
+| `create_show_intro` | 播客开场白：为播客创建引人入胜的简短开场介绍。 |
+| `create_sigma_rules` | 生成 Sigma 规则：从安全新闻中提取 TTP 并转换为检测规则。 |
+| `create_story_about_people_interaction` | 人物互动故事：基于人格分析创作现实主义的人物驱动故事。 |
+| `create_story_about_person` | 人物故事：展示人物如何根据其特质处理日常问题。 |
+| `create_story_explanation` | 讲故事解释：以通俗易懂的故事形式解释复杂概念。 |
+| `create_stride_threat_model` | STRIDE 威胁模型：为系统设计创建 STRIDE 威胁模型和风险评估。 |
+| `create_summary` | 全面总结：提供一句话总结、10 个要点和 5 个关键收获。 |
+| `create_tags` | 创建标签：为知识图谱识别至少 5 个相关标签。 |
+| `create_threat_scenarios` | 威胁场景设计：为系统设计可能的攻击路径和叙事模型。 |
+| `create_ttrc_graph` | TTRC 图表数据：生成关键漏洞修复时间（TTRC）的 CSV 数据。 |
+| `create_ttrc_narrative` | TTRC 叙事逻辑：创建强调缩短漏洞修复时间进度的说服性叙事。 |
+| `create_upgrade_pack` | 创建升级包：提取世界模型和算法更新。 |
+| `create_user_story` | 书写用户故事：为复杂软件的新功能编写清晰的技术用户故事。 |
+| `create_video_chapters` | 创建视频章节：从字幕中提取有趣的主题和时间戳。 |
+| `create_visualization` | ASCII 可视化：使用复杂的 ASCII 艺术转化抽象点子。 |
+| `dialog_with_socrates` | 苏格拉底式对话：通过提问挑战信念，进行深度对话。 |
+| `enrich_blog_post` | 润色博客：改进 Markdown 文件的结构、视觉和可读性。 |
+| `explain_code` | 代码解释：解释代码、安全工具输出或配置文件。 |
+| `explain_docs` | 重写文档：将工具文档重组为清晰、简洁的说明。 |
+| `explain_math` | 数学教练：用清晰、吸引人的方式帮助理解数学概念。 |
+| `explain_project` | 项目解释：总结项目文档，涵盖安装、使用和示例。 |
+| `explain_terms` | 术语解释：提供术语表，包含定义、类比和重要性说明。 |
+| `export_data_as_csv` | 导出 CSV：提取并以 CSV 格式输出数据结构。 |
+| `extract_algorithm_update_recommendations` | 提取算法建议：提取简洁、实用的算法更新建议。 |
+| `extract_article_wisdom` | 提取文章精华：提取令人惊讶的见解、金句、事实和建议。 |
+| `extract_book_ideas` | 提取书籍点子：从书中提取 50-100 个最深刻的点子。 |
+| `extract_book_recommendations` | 提取书籍建议：从书中提取实用的、可操作的建议列表。 |
+| `extract_business_ideas` | 提取商业创意：提取顶级创意并详细阐述前 10 名。 |
+| `extract_characters` | 提取人物：识别所有角色、别名、动机和互动。 |
+| `extract_controversial_ideas` | 提取争议点：提取争议性陈述及其支持性引用。 |
+| `extract_core_message` | 提取核心信息：提取能清晰表达作品核心的一句话。 |
+| `extract_ctf_writeup` | 提取 CTF 报告：从网络安全实战中提取简短的 Writeup。 |
+| `extract_domains` | 提取域名：提取内容中的域名和 URL 以识别信源。 |
+| `extract_extraordinary_claims` | 提取惊人言论：提取对话中科学上有争议或错误的陈述。 |
+| `extract_ideas` | 提取点子：提取所有关键点子并以 15 字列表展示。 |
+| `extract_insights` | 提取洞察：提取最强有力的见解并格式化为列表。 |
+| `extract_insights_dm` | 深度洞察提取：提取有价值的见解和内容要点总结。 |
+| `extract_instructions` | 提取操作说明：从视频字幕中提取清晰、分步骤的操作指令。 |
+| `extract_jokes` | 提取笑话：从文本中提取笑话及其梗概。 |
+| `extract_latest_video` | 提取最新视频：从 YouTube RSS 提要中提取最新视频 URL。 |
+| `extract_main_activities` | 提取主要活动：提取事件、转录或日志中的关键活动。 |
+| `extract_main_idea` | 提取主旨：以 15 字简洁表达核心思想和关键建议。 |
+| `extract_mcp_servers` | 提取 MCP 服务：识别并总结提到的 Model Context Protocol 服务器。 |
+| `extract_most_redeeming_thing` | 提取亮点：提取输入中最具补救价值的一句话亮点。 |
+| `extract_patterns` | 提取模式：分析重复出现的、令人惊讶的模式并给出建议。 |
+| `extract_poc` | 提取 POC：从报告中提取漏洞验证 URL 和执行命令。 |
+| `extract_predictions` | 提取预测：提取预测详情、日期、置信度和验证方法。 |
+| `extract_primary_problem` | 提取主要问题：提取作品中呈现的关于世界的主要问题。 |
+| `extract_primary_solution` | 提取解决方案：提取作品中呈现的关于世界的主要方案。 |
+| `extract_product_features` | 提取产品特性：以列表格式输出所有产品功能特性。 |
+| `extract_questions` | 提取提问：提取面试或对话中访谈者提出的所有问题。 |
+| `extract_recipe` | 提取食谱：提取描述、配方、分量和烹饪步骤。 |
+| `extract_recommendations` | 提取建议：从内容中提取简洁、实用的建议列表。 |
+| `extract_references` | 提取引用：提取提到的艺术、书籍、文学等各种来源。 |
+| `extract_skills` | 提取技能：将职位描述中的软硬技能分类提取到表格中。 |
+| `extract_song_meaning` | 分析歌词含义：深入分析歌词背后的意涵、证据和背景。 |
+| `extract_sponsors` | 提取赞助商：从转录内容中识别官方和潜在赞助商。 |
+| `extract_videoid` | 提取视频 ID：从任何 URL 中提取视频 ID。 |
+| `extract_wisdom` | 提取智慧：提取关于人工智能、人类成长等领域的智慧精华。 |
+| `extract_wisdom_agents` | 代理智慧提取：侧重于人类繁荣、AI 和技术的深刻洞察。 |
+| `extract_wisdom_dm` | 全方位智慧提取：提取最有启发性的思想、名言和建议。 |
+| `extract_wisdom_nometa` | 纯净智慧提取：不含元数据的纯净版见解提取。 |
+| `find_female_life_partner` | 寻找伴侣建议：分析择偶标准并提供诗意且直接的描述。 |
+| `find_hidden_message` | 寻找隐藏信息：提取政治信息、隐藏动机和愤世嫉俗的分析。 |
+| `find_logical_fallacies` | 识别逻辑谬误：分析论点中的谬误并进行详细归类。 |
+| `fix_typos` | 修复拼写：纠正文本中的拼写、语法和标点错误。 |
+| `generate_code_rules` | 生成编码规则：为 AI 辅助开发编译最佳实践和护栏。 |
+| `get_wow_per_minute` | 惊艳指数评估：测量内容的惊喜度、新颖性和智慧含金量。 |
+| `heal_person` | 心灵治愈计划：基于心理侧写制定精神和心理愈合计划。 |
+| `humanize` | 拟人化：将 AI 生成的文本修改为自然、口语化的风格。 |
+| `identify_dsrp_distinctions` | DSRP 区分：通过系统思维探索界限及其含义。 |
+| `identify_dsrp_perspectives` | DSRP 视角：关注边界如何定义想法并影响理解。 |
+| `identify_dsrp_relationships` | DSRP 关系：探索想法间的连接，揭示复杂系统的模式。 |
+| `identify_dsrp_systems` | DSRP 系统：将想法组织为部分与整体的系统。 |
+| `identify_job_stories` | 识别工作故事：识别角色的关键工作场景或需求。 |
+| `improve_academic_writing` | 学术润色：修正语法，提高学术写作的连贯性与专业度。 |
+| `improve_prompt` | 优化提示词：应用专家策略改进 AI 提示词的效果。 |
+| `improve_report_finding` | 优化安全报告：改进渗透测试发现，提供结构化、详细的描述。 |
+| `improve_writing` | 优化写作：润色文本风格、纠正语法并维持原意。 |
+| `judge_output` | 评判输出：评估回溯查询的有效性并提供批判性见解。 |
+| `label_and_rate` | 标签与评级：为内容打标并根据质量和深度进行 S/A/B/C 评级。 |
+| `md_callout` | Markdown 提示框：根据文本内容分类生成最合适的 MD 提示框。 |
+| `model_as_sherlock_freud` | 福尔摩斯·弗洛伊德模型：结合侦探推理和心理分析建立模型。 |
+| `official_pattern_template` | 官方模板：用于创建新 Fabric 模式的参考模板。 |
+| `predict_person_actions` | 行为预测：基于心理侧写预测个体在特定挑战下的反应。 |
+| `prepare_7s_strategy` | 7S 战略汇报：准备涵盖组织概况和市场动态的 7S 战略文档。 |
+| `provide_guidance` | 提供指引：提供心理和生活教练建议，语调富有同情心且诚实。 |
+| `rate_ai_response` | 评估 AI 回答：将 AI 响应与顶级人类专家对比并给出分数值。 |
+| `rate_ai_result` | 评估 AI 成果：从创意、覆盖面等维度深度分析 AI/ML 的输出质量。 |
+| `rate_content` | 内容分级：根据见解数量和人类价值关联度为内容打分。 |
+| `rate_value` | 价值评估：深入分析输入及其意图，产出最佳质量的评价。 |
+| `raw_query` | 原意查询：充分揣摩发送者意图并产出其最想要的结果。 |
+| `recommend_artists` | 推荐艺人：根据个人喜好推荐个性化的音乐节艺人名单。 |
+| `recommend_pipeline_upgrades` | 优化漏洞检查流水线：引入新信息并提高流程效率。 |
+| `recommend_talkpanel_topics` | 推荐演讲主题：为个人推荐适合会议投稿的演讲话题点子。 |
+| `recommend_yoga_practice` | 推荐瑜伽练习：提供个性化的瑜伽序列和冥想指导。 |
+| `refine_design_document` | 精炼设计文档：基于评审意见分析并实施文档变更。 |
+| `review_design` | 设计评审：评审架构设计，关注安全性、扩展性与组件清晰度。 |
+| `sanitize_broken_html_to_markdown` | 清理 HTML 转 Markdown：处理混乱的 HTML 并转为规范的 MD 排版。 |
+| `suggest_pattern` | 推荐模式：根据用户输入推荐最合适的技能模式和解释。 |
+| `summarize` | 总结：提供 20 字一句话总结、主要观点和收获。 |
+| `summarize_board_meeting` | 总结董事会：从会议纪要中提取正式笔记，用于公司治理。 |
+| `summarize_debate` | 辩论总结：识别分歧点、提取论点并预测胜负结果。 |
+| `summarize_git_changes` | 总结 Git 变更：以充满热情的语气总结过去 7 天的项目更新。 |
+| `summarize_git_diff` | 总结 Git Diff：总结 Git 变更点并生成简明提交消息。 |
+| `summarize_lecture` | 讲座总结：从讲座转录中提取定义、工具和关键收获。 |
+| `summarize_legislation` | 总结立法：分析政治提案的关键点、变更及均衡性分析。 |
+| `summarize_meeting` | 会议录：提取结构化总结，包含决定、任务和时间轴。 |
+| `summarize_micro` | 超微总结：将内容极致冷缩为 20 字总结和 3 个要点。 |
+| `summarize_newsletter` | 总结时讯：从新闻简报中提取有价值的内容、公司和工具。 |
+| `summarize_paper` | 论文总结：详细描述技术方案、实验设置、结果和限制。 |
+| `summarize_prompt` | 总结提示词：用一段话清晰描述 AI 提示词的功能与目的。 |
+| `summarize_pull-requests` | 总结 PR：总结并列出代码仓库中最重要的一批 PR。 |
+| `summarize_rpg_session` | 总结跑团：提取剧本推进、战斗详情和角色变更。 |
+| `t_analyze_challenge_handling` | 挑战应对评估：评估处理挑战的努力程度并给出中肯评价。 |
+| `t_check_dunning_kruger` | Dunning-Kruger 检查：评估自我感知与实际能力间的偏差模式。 |
+| `t_check_metrics` | 检查指标：基于近期表现评估核心改进和 KPI。 |
+| `t_create_h3_career` | 职业发展洞察：基于 TELOS 文件分析并提供智慧建议。 |
+| `t_create_opening_sentences` | 生成自我介绍：以谦逊的方式用 4 个短句描述个人身份和目标。 |
+| `t_describe_life_outlook` | 描述人生观：用 5 条简洁内容描述一个人的生活态度。 |
+| `t_extract_intro_sentences` | 提取个人简介：生成关于个人工作和当前项目的背景简介。 |
+| `t_extract_panel_topics` | 提取个人演讲点：基于个人背景生成 5 个演讲或研讨会主题。 |
+| `t_find_blindspots` | 发现盲点：识别可能暴露个人风险或错误的思维框架盲点。 |
+| `t_find_negative_thinking` | 发现消极思维：识别文档或日志中的消极情绪并给予鼓励。 |
+| `t_find_neglected_goals` | 发现被忽视的目标：识别近期未被关注的项目或目标。 |
+| `t_give_encouragement` | 项目激励：评估进度、给予鼓励并提供持续努力的建议。 |
+| `t_red_team_thinking` | 红队思维：对思维模型和框架进行红队测试并提出改进建议。 |
+| `t_threat_model_plans` | 个人计划风险建模：为生活计划建立威胁模型并推荐优化方案。 |
+| `t_visualize_mission_goals_projects` | 可视化使命与项目：创建 ASCII 图表展示使命、目标与项目的关联。 |
+| `t_year_in_review` | 年度回顾：基于个人文件生成洞察，总结成就并进行可视化。 |
+| `to_flashcards` | 转为闪卡：从文本中提取并优化 Anki 测验闪卡。 |
+| `transcribe_minutes` | 会议分钟：从转录中提取待办事项、洞察、决定和挑战。 |
+| `translate` | 翻译：将文档翻译为指定语言代码并保持原意定位。 |
+| `tweet` | 推文指南：撰写吸引人的推文并涵盖推特运营基础。 |
+| `write_essay` | 模仿风格写作：模拟特定作家的独特声线、词汇和方式。使用 author_name。 |
+| `write_essay_pg` | Paul Graham 风格散文：以 PG 风格撰写清晰、深刻的文章。 |
+| `write_hackerone_report` | HackerOne 报告：生成清晰、可复现的漏洞奖励报告详情。 |
+| `write_latex` | 生成 LaTeX：为文档生成语法正确的 LaTeX 代码。 |
+| `write_micro_essay` | 微缩短文：以 PG 风格撰写简短、充满启发的文章。 |
+| `write_nuclei_template_rule` | Nuclei 规则编写：生成检测漏洞的 YAML 模板。 |
+| `write_pull-request` | 书写 PR：起草详细的 PR 描述，解释变更原因及风险。 |
+| `write_semgrep_rule` | Semgrep 规则编写：根据输入创建精确工作的 Semgrep 规则。 |
+| `youtube_summary` | Youtube 视频总结：创建带时间戳的简洁总结，突出关键点。 |
