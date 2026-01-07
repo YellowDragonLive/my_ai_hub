@@ -1,0 +1,68 @@
+20:52:50 listening server at http://0.0.0.0:4000
+21:41:2 listening server at http://0.0.0.0:4000
+21:46:6 listening server at http://0.0.0.0:4000
+21:46:15 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:47:5 listening server at http://0.0.0.0:4000
+21:47:14 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:47:14 debug validate form,[object Object]
+21:48:0 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:48:0 debug validate form,[object Object]
+21:49:32 listening server at http://0.0.0.0:4000
+21:49:39 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:49:39 debug validate form,[object Object]
+21:53:29 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:53:29 debug validate form,[object Object]
+21:53:51 debug u,{
+  "id": 2,
+  "username": "lin",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+21:53:51 debug validate form,[object Object]
+15:8:31 listening server at http://0.0.0.0:4000
+15:8:46 listening server at http://127.0.0.1:4000
+15:16:54 debug u,{
+  "id": 1,
+  "username": "gua",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+15:16:54 debug validate form,[object Object]
+15:17:10 debug u,{
+  "id": 2,
+  "username": "lin",
+  "password": "6aa61ba1213b734b79cd659110994562d085d326",
+  "note": ""
+},[object Object]
+15:17:10 debug validate form,[object Object]
+15:25:57 listening server at http://127.0.0.1:4000
+15:27:7 listening server at http://127.0.0.1:4000
+15:28:41 listening server at http://127.0.0.1:4000
+15:29:23 listening server at http://127.0.0.1:4000
+15:29:46 listening server at http://127.0.0.1:4000
+15:32:52 listening server at http://127.0.0.1:4000

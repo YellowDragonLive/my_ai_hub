@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>极客 AI 助手 | Geek AI Hub</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- 侧边栏 -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1 class="logo">🤖 Geek AI</h1>
+                <button class="new-chat-btn" id="newChatBtn">
+                    <span>+</span> 新对话
+                </button>
+            </div>
+
+            <!-- 搜索框 -->
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="搜索会话...">
+            </div>
+
+            <!-- 会话列表 -->
+            <div class="conversation-list" id="conversationList">
+                <!-- 动态填充 -->
+            </div>
+
+            <!-- 设置按钮 -->
+            <div class="sidebar-footer">
+                <button class="settings-btn" id="settingsBtn">
+                    ⚙️ 设置
+                </button>
+            </div>
+        </aside>
+
+        <!-- 主内容区 -->
+        <main class="main-content">
+            <!-- 顶部栏 -->
+            <header class="top-bar">
+                <div class="model-selector">
+                    <select id="modelSelect">
+                        <!-- 动态填充 -->
+                    </select>
+                </div>
+                <div class="pattern-indicator" id="patternIndicator">
+                    <!-- 当前选中的 Pattern -->
+                </div>
+            </header>
+
+            <!-- 消息区域 -->
+            <div class="messages-container" id="messagesContainer">
+                <div class="welcome-screen" id="welcomeScreen">
+                    <h2>👋 欢迎使用极客 AI 助手</h2>
+                    <p>输入 <kbd>/</kbd> 快速调用技能库</p>
+                    <div class="quick-patterns" id="quickPatterns">
+                        <!-- 热门 Patterns -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 输入区域 -->
+            <div class="input-container">
+                <div class="pattern-search-popup" id="patternPopup">
+                    <div class="pattern-search-header">
+                        <input type="text" id="patternSearchInput" placeholder="搜索技能...">
+                    </div>
+                    <div class="pattern-list" id="patternList">
+                        <!-- 动态填充 -->
+                    </div>
+                </div>
+
+                <div class="input-wrapper">
+                    <textarea id="messageInput" placeholder="输入消息，或按 / 调用技能..." rows="1"></textarea>
+                    <div class="input-actions">
+                        <button class="suggest-btn" id="suggestBtn" title="AI 推荐技能">
+                            🎯
+                        </button>
+                        <button class="enhance-btn" id="enhanceBtn" title="AI 优化 Prompt">
+                            ✨
+                        </button>
+                        <button class="send-btn" id="sendBtn">
+                            发送
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- 设置弹窗 -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>⚙️ API 配置</h3>
+                <button class="close-btn" id="closeSettingsBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="config-list" id="configList">
+                    <!-- 动态填充 -->
+                </div>
+                <button class="add-config-btn" id="addConfigBtn">+ 添加配置</button>
+
+                <div class="config-form" id="configForm" style="display:none;">
+                    <div class="form-group">
+                        <label>配置名称</label>
+                        <input type="text" id="configName" placeholder="例如：OpenAI API">
+                    </div>
+                    <div class="form-group">
+                        <label>厂商</label>
+                        <select id="configVendor">
+                            <option value="openai">OpenAI</option>
+                            <option value="anthropic">Anthropic</option>
+                            <option value="google">Google</option>
+                            <option value="custom">自定义</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>模型</label>
+                        <input type="text" id="configModel" placeholder="例如：gpt-4">
+                    </div>
+                    <div class="form-group">
+                        <label>API Key</label>
+                        <input type="password" id="configApiKey" placeholder="sk-...">
+                    </div>
+                    <div class="form-group">
+                        <label>Base URL（可选）</label>
+                        <input type="text" id="configBaseUrl" placeholder="https://api.openai.com">
+                    </div>
+                    <div class="form-actions">
+                        <button class="cancel-btn" id="cancelConfigBtn">取消</button>
+                        <button class="save-btn" id="saveConfigBtn">保存</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/app.js"></script>
+</body>
+
+</html>
