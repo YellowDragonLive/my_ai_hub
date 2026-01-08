@@ -194,7 +194,7 @@ const clearCache = () => {
 /**
  * 保存新的 Pattern
  */
-const savePattern = (name, content) => {
+const savePattern = (name, content, description_zh = '') => {
     const patternDir = path.join(config.patternsDir, name)
 
     // 创建目录
@@ -204,6 +204,21 @@ const savePattern = (name, content) => {
 
     // 写入 system.md
     fs.writeFileSync(path.join(patternDir, 'system.md'), content, 'utf-8')
+
+    // 同步更新中文翻译文件
+    if (description_zh) {
+        const transPath = path.join(config.patternsDir, 'pattern_translations_zh.json')
+        try {
+            let translations = {}
+            if (fs.existsSync(transPath)) {
+                translations = JSON.parse(fs.readFileSync(transPath, 'utf-8'))
+            }
+            translations[name] = description_zh
+            fs.writeFileSync(transPath, JSON.stringify(translations, null, 2), 'utf-8')
+        } catch (e) {
+            console.error('[PatternLoader] 无法更新中文翻译:', e.message)
+        }
+    }
 
     // 清除缓存以触发热加载
     clearCache()

@@ -415,6 +415,7 @@ textarea {
     max-height: 400px;
     overflow-y: auto;
     z-index: 100;
+    padding-top: 8px;
 }
 
 .pattern-item {

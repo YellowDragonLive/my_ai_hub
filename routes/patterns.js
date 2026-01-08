@@ -214,7 +214,7 @@ router.post('/generate', async (req, res) => {
 // 保存生成的 Skill
 router.post('/save', (req, res) => {
     try {
-        const { name, content } = req.body
+        const { name, content, description_zh } = req.body
         if (!name || !content) {
             return res.status(400).json({ success: false, error: '缺少名称或内容' })
         }
@@ -224,7 +224,7 @@ router.post('/save', (req, res) => {
             .replace(/\s+/g, '_')
             .replace(/[^a-z0-9_]/g, '')
 
-        const pattern = patternLoader.savePattern(safeName, content)
+        const pattern = patternLoader.savePattern(safeName, content, description_zh)
         res.json({ success: true, data: pattern })
     } catch (e) {
         res.status(500).json({ success: false, error: e.message })

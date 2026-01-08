@@ -355,17 +355,24 @@ class App {
     }
 
     filterPatterns(query) {
-        const q = query.toLowerCase();
+        const q = query.trim().toLowerCase();
+        console.log('[Search] Query:', q, 'Pattern Count:', this.patterns.length);
+
         const filtered = this.patterns.filter(p =>
             p.name.toLowerCase().includes(q) ||
-            p.description.toLowerCase().includes(q) ||
+            (p.description && p.description.toLowerCase().includes(q)) ||
             (p.description_zh && p.description_zh.includes(q))
         );
+
+        console.log('[Search] Filtered Count:', filtered.length);
 
         if (filtered.length > 0) {
             this.renderPatternList(filtered);
         } else if (q.length >= 1) {
+            // 如果是中文输入过程中，q 可能暂时为空或者不匹配，所以加个保护
             this.showNoResultsAndFetchRecommendations(q);
+        } else {
+            this.renderPatternList(this.patterns);
         }
     }
 
@@ -609,6 +616,7 @@ class App {
     async saveGeneratedPattern() {
         const name = this.genPatternName.value.trim();
         const content = this.genContentPreview.value.trim();
+        const description_zh = this.genDescription.value.trim();
 
         if (!name || !content) return alert('名称和内容不能为空');
 
@@ -616,7 +624,7 @@ class App {
             const res = await fetch('/api/patterns/save', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ name, content })
+                body: JSON.stringify({ name, content, description_zh })
             });
             const json = await res.json();
 
