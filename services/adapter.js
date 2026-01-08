@@ -14,7 +14,7 @@ const buildRequest = (messages, options = {}) => {
     const endpoint = `${config.baseUrl}/v1/chat/completions`
 
     const payload = {
-        model: config.model,
+        model: options.model || config.model,
         messages: messages,
         stream: options.stream || false,
         temperature: options.temperature || 0.7,

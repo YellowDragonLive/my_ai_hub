@@ -135,8 +135,16 @@ router.post('/chat', async (req, res) => {
         // 发送会话 ID
         res.write(`data: ${JSON.stringify({ type: 'conversation', id: convId })}\n\n`)
 
-        // 发送流式请求
-        const stream = await adapter.sendStreamRequest(messages)
+        // 发送流式请求时处理抗截断前缀
+        const { antiTruncate } = req.body
+        const activeConfig = require('../models/APIConfig').getActive()
+        let requestModel = activeConfig ? activeConfig.model : ''
+
+        if (antiTruncate && requestModel && !requestModel.startsWith('流式抗截断/')) {
+            requestModel = `流式抗截断/${requestModel}`
+        }
+
+        const stream = await adapter.sendStreamRequest(messages, requestModel)
         const reader = stream.getReader()
         const decoder = new TextDecoder()
 

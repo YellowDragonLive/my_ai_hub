@@ -31,6 +31,7 @@ class App {
         this.enhanceBtn = document.getElementById('enhanceBtn');
         this.suggestBtn = document.getElementById('suggestBtn');
         this.patternIndicator = document.getElementById('patternIndicator');
+        this.antiTruncateToggle = document.getElementById('antiTruncateToggle');
 
         // Pattern 弹窗
         this.patternPopup = document.getElementById('patternPopup');
@@ -45,6 +46,20 @@ class App {
         this.configForm = document.getElementById('configForm');
         this.saveConfigBtn = document.getElementById('saveConfigBtn');
         this.cancelConfigBtn = document.getElementById('cancelConfigBtn');
+
+        // 智能生成弹窗相关
+        this.generateModal = document.getElementById('generateModal');
+        this.closeGenerateBtn = document.getElementById('closeGenerateBtn');
+        this.genDescription = document.getElementById('genDescription');
+        this.refChipsCont = document.getElementById('refChips');
+        this.startGenBtn = document.getElementById('startGenBtn');
+        this.genStep1 = document.getElementById('generateStep1');
+        this.genStep2 = document.getElementById('generateStep2');
+        this.genLoading = document.getElementById('genLoading');
+        this.genContentPreview = document.getElementById('genContentPreview');
+        this.genPatternName = document.getElementById('genPatternName');
+        this.saveGenBtn = document.getElementById('saveGenBtn');
+        this.backToStep1Btn = document.getElementById('backToStep1');
     }
 
     bindEvents() {
@@ -92,10 +107,17 @@ class App {
         this.cancelConfigBtn.onclick = () => this.hideConfigForm();
         this.saveConfigBtn.onclick = () => this.saveConfig();
 
+        // 智能生成弹窗
+        this.closeGenerateBtn.onclick = () => this.closeGenerateModal();
+        this.startGenBtn.onclick = () => this.generatePattern();
+        this.saveGenBtn.onclick = () => this.saveGeneratedPattern();
+        this.backToStep1Btn.onclick = () => this.showGenStep(1);
+
         // 点击外部隐藏
         window.onclick = (e) => {
             if (e.target === this.settingsModal) this.closeSettings();
-            if (!this.patternPopup.contains(e.target) && e.target !== this.msgInput) {
+            if (e.target === this.generateModal) this.closeGenerateModal();
+            if (this.patternPopup && !this.patternPopup.contains(e.target) && e.target !== this.msgInput) {
                 this.hidePatternPopup();
             }
         };
@@ -107,13 +129,32 @@ class App {
         const res = await fetch('/api/config');
         const json = await res.json();
         if (json.success) {
-            this.modelSelect.innerHTML = json.data.map(c =>
-                `<option value="${c.id}" ${c.isActive ? 'selected' : ''}>${c.name} (${c.model})</option>`
-            ).join('');
-
+            this.renderModelOptions(json.data);
             // 绑定切换事件
             this.modelSelect.onchange = (e) => this.switchConfig(e.target.value);
         }
+    }
+
+    renderModelOptions(configs) {
+        const groups = {};
+        configs.forEach(c => {
+            const vendor = c.vendor || 'Other';
+            if (!groups[vendor]) groups[vendor] = [];
+            if (c.model.startsWith('流式抗截断/')) return;
+            groups[vendor].push(c);
+        });
+
+        let html = '';
+        const sortedVendors = Object.keys(groups).sort();
+        for (const vendor of sortedVendors) {
+            const label = vendor.charAt(0).toUpperCase() + vendor.slice(1);
+            html += `<optgroup label="${label}">`;
+            html += groups[vendor].map(c =>
+                `<option value="${c.id}" ${c.isActive ? 'selected' : ''}>${c.name} (${c.model})</option>`
+            ).join('');
+            html += `</optgroup>`;
+        }
+        this.modelSelect.innerHTML = html;
     }
 
     async loadConversations() {
@@ -246,7 +287,9 @@ class App {
                 body: JSON.stringify({
                     conversationId: this.currentConversationId,
                     content: text,
-                    patternName: this.currentPattern
+                    patternName: this.currentPattern,
+                    // 动态注入抗截断模式逻辑
+                    antiTruncate: this.antiTruncateToggle.checked
                 })
             });
 
@@ -318,7 +361,54 @@ class App {
             p.description.toLowerCase().includes(q) ||
             (p.description_zh && p.description_zh.includes(q))
         );
-        this.renderPatternList(filtered);
+
+        if (filtered.length > 0) {
+            this.renderPatternList(filtered);
+        } else if (q.length >= 1) {
+            this.showNoResultsAndFetchRecommendations(q);
+        }
+    }
+
+    async showNoResultsAndFetchRecommendations(query) {
+        this.patternListCont.innerHTML = `
+            <div class="no-results">
+                <div>未找到匹配项 "${query}"</div>
+                <div class="generate-prompt">
+                    <p style="font-size: 12px;">试试由 AI 推荐相似技能或智能生成？</p>
+                    <button class="btn-generate" onclick="app.openGenerateModal('${query}')">✨ 智能生成 "${query}" 技能</button>
+                </div>
+                <div id="recommendationArea" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 10px;">
+                    <div style="font-size: 11px; color: var(--text-muted);">正在加载相关推荐...</div>
+                </div>
+            </div>
+        `;
+
+        try {
+            const res = await fetch(`/api/patterns/recommend?q=${encodeURIComponent(query)}`);
+            const json = await res.json();
+            const recCont = document.getElementById('recommendationArea');
+            if (recCont && json.success && json.data.length > 0) {
+                recCont.innerHTML = `
+                    <div style="font-size: 11px; color: var(--text-muted); margin-bottom: 8px;">为您找到相似技能：</div>
+                    ${json.data.map(p => `
+                        <div class="pattern-item" data-name="${p.name}" style="text-align: left; padding: 8px; border-radius: 4px; border: 1px solid var(--border-color); margin-bottom: 5px;">
+                            <div class="pattern-name" style="font-size: 13px;">${p.name}</div>
+                            <div class="pattern-desc" style="font-size: 11px;">${p.description_zh || p.description}</div>
+                        </div>
+                    `).join('')}
+                `;
+                recCont.querySelectorAll('.pattern-item').forEach(el => {
+                    el.onclick = (e) => {
+                        e.stopPropagation();
+                        this.selectPattern(el.dataset.name);
+                    };
+                });
+            } else if (recCont) {
+                recCont.innerHTML = '<div style="font-size: 11px; color: var(--text-muted);">无相关联技能推荐。</div>';
+            }
+        } catch (e) {
+            console.error('Fetch recommendations error', e);
+        }
     }
 
     selectPattern(name) {
@@ -439,6 +529,108 @@ class App {
 
     async switchConfig(id) {
         await fetch(`/api/config/${id}/activate`, { method: 'POST' });
+    }
+
+    // --- 智能生成业务逻辑 ---
+
+    openGenerateModal(initialQuery = '') {
+        this.hidePatternPopup();
+        this.generateModal.style.display = 'flex';
+        this.showGenStep(1);
+        this.genDescription.value = initialQuery;
+        this.genPatternName.value = initialQuery.replace(/\s+/g, '_').toLowerCase();
+        this.renderRefChips(initialQuery);
+    }
+
+    closeGenerateModal() {
+        this.generateModal.style.display = 'none';
+    }
+
+    showGenStep(step) {
+        this.genStep1.style.display = step === 1 ? 'block' : 'none';
+        this.genStep2.style.display = step === 2 ? 'block' : 'none';
+        this.genLoading.style.display = step === 'loading' ? 'block' : 'none';
+    }
+
+    async renderRefChips(query) {
+        this.refChipsCont.innerHTML = '<span style="font-size: 12px; color: var(--text-muted);">正在加载参考...</span>';
+        try {
+            const res = await fetch(`/api/patterns/recommend?q=${encodeURIComponent(query)}`);
+            const json = await res.json();
+            if (json.success && json.data.length > 0) {
+                this.refChipsCont.innerHTML = json.data.map(p => `
+                    <div class="ref-chip" data-name="${p.name}">${p.name}</div>
+                `).join('');
+                this.refChipsCont.querySelectorAll('.ref-chip').forEach(el => {
+                    el.onclick = () => {
+                        const isp = el.classList.contains('active');
+                        this.refChipsCont.querySelectorAll('.ref-chip').forEach(c => c.classList.remove('active'));
+                        if (!isp) el.classList.add('active');
+                    };
+                });
+            } else {
+                this.refChipsCont.innerHTML = '<span style="font-size: 12px; color: var(--text-muted);">暂无相似参考。</span>';
+            }
+        } catch (e) {
+            this.refChipsCont.innerHTML = '';
+        }
+    }
+
+    async generatePattern() {
+        const description = this.genDescription.value.trim();
+        if (!description) return alert('请输入需求描述');
+
+        const activeRef = this.refChipsCont.querySelector('.ref-chip.active');
+        const referencePattern = activeRef ? activeRef.dataset.name : null;
+
+        this.showGenStep('loading');
+
+        try {
+            const res = await fetch('/api/patterns/generate', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ description, referencePattern })
+            });
+            const json = await res.json();
+
+            if (json.success) {
+                this.genContentPreview.value = json.data;
+                this.showGenStep(2);
+            } else {
+                alert('生成失败: ' + json.error);
+                this.showGenStep(1);
+            }
+        } catch (e) {
+            alert('生成出错: ' + e.message);
+            this.showGenStep(1);
+        }
+    }
+
+    async saveGeneratedPattern() {
+        const name = this.genPatternName.value.trim();
+        const content = this.genContentPreview.value.trim();
+
+        if (!name || !content) return alert('名称和内容不能为空');
+
+        try {
+            const res = await fetch('/api/patterns/save', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ name, content })
+            });
+            const json = await res.json();
+
+            if (json.success) {
+                alert('技能已成功保存并启用！');
+                this.closeGenerateModal();
+                await this.loadPatterns(); // 重新加载技能列表
+                this.selectPattern(json.data.name); // 自动选中新技能
+            } else {
+                alert('保存失败: ' + json.error);
+            }
+        } catch (e) {
+            alert('保存出错: ' + e.message);
+        }
     }
 }
 

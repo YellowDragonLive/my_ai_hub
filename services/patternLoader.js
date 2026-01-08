@@ -116,7 +116,7 @@ const loadAllPatterns = () => {
 }
 
 /**
- * 搜索 patterns
+ * 搜索 patterns (硬匹配)
  */
 const searchPatterns = (query) => {
     const patterns = loadAllPatterns()
@@ -127,6 +127,33 @@ const searchPatterns = (query) => {
         p.description.toLowerCase().includes(q) ||
         (p.description_zh && p.description_zh.includes(q))
     )
+}
+
+/**
+ * 智能建议 patterns (基于权重评分)
+ */
+const suggestPatterns = (query, limit = 3) => {
+    const patterns = loadAllPatterns()
+    const q = query.toLowerCase()
+    const keywords = q.split(/\s+/).filter(k => k.length > 0)
+
+    if (keywords.length === 0) return []
+
+    const scored = patterns.map(p => {
+        let score = 0
+        keywords.forEach(k => {
+            if (p.name.toLowerCase().includes(k)) score += 10
+            if (p.description.toLowerCase().includes(k)) score += 5
+            if (p.description_zh && p.description_zh.includes(k)) score += 5
+            if (p.category.toLowerCase().includes(k)) score += 2
+        })
+        return { ...p, score }
+    })
+
+    return scored
+        .filter(p => p.score > 0)
+        .sort((a, b) => b.score - a.score)
+        .slice(0, limit)
 }
 
 /**
@@ -155,18 +182,41 @@ const getCategories = () => {
 }
 
 /**
- * 清除缓存
+ * 清除缓存并重新加载
  */
 const clearCache = () => {
     patternsCache = null
     patternDescriptions = {}
     patternTranslationsZh = {}
+    loadAllPatterns()
+}
+
+/**
+ * 保存新的 Pattern
+ */
+const savePattern = (name, content) => {
+    const patternDir = path.join(config.patternsDir, name)
+
+    // 创建目录
+    if (!fs.existsSync(patternDir)) {
+        fs.mkdirSync(patternDir, { recursive: true })
+    }
+
+    // 写入 system.md
+    fs.writeFileSync(path.join(patternDir, 'system.md'), content, 'utf-8')
+
+    // 清除缓存以触发热加载
+    clearCache()
+
+    return loadPattern(name)
 }
 
 module.exports = {
     loadAllPatterns,
     searchPatterns,
+    suggestPatterns,
     getPattern,
     getCategories,
-    clearCache
+    clearCache,
+    savePattern
 }

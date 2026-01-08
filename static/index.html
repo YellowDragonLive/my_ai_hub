@@ -41,10 +41,19 @@
         <main class="main-content">
             <!-- 顶部栏 -->
             <header class="top-bar">
-                <div class="model-selector">
-                    <select id="modelSelect">
-                        <!-- 动态填充 -->
-                    </select>
+                <div class="model-selection-group">
+                    <div class="model-selector">
+                        <select id="modelSelect">
+                            <!-- 动态填充 -->
+                        </select>
+                    </div>
+                    <div class="anti-truncate-wrapper">
+                        <label class="switch" title="启用流式抗截断模式">
+                            <input type="checkbox" id="antiTruncateToggle">
+                            <span class="slider round"></span>
+                        </label>
+                        <span class="anti-truncate-label">抗截断</span>
+                    </div>
                 </div>
                 <div class="pattern-indicator" id="patternIndicator">
                     <!-- 当前选中的 Pattern -->
@@ -134,6 +143,52 @@
                         <button class="cancel-btn" id="cancelConfigBtn">取消</button>
                         <button class="save-btn" id="saveConfigBtn">保存</button>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 智能生成弹窗 -->
+    <div class="modal" id="generateModal">
+        <div class="modal-content wide">
+            <div class="modal-header">
+                <h3>🆕 智能生成技能 (Skill)</h3>
+                <button class="close-btn" id="closeGenerateBtn">×</button>
+            </div>
+            <div class="modal-body">
+                <div id="generateStep1">
+                    <div class="form-group">
+                        <label>你想让 AI 帮你做什么？</label>
+                        <textarea id="genDescription" placeholder="例如：帮我写一个短视频分镜脚本，需要包含镜头号、画面内容、对白和时长..."
+                            rows="3"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>参考已有技能 (可选)</label>
+                        <div class="ref-chips" id="refChips">
+                            <!-- 动态填充建议的 Pattern -->
+                        </div>
+                    </div>
+                    <button class="send-btn" id="startGenBtn" style="width: 100%; margin-top: 12px;">由 AI 开始生成</button>
+                </div>
+
+                <div id="generateStep2" style="display: none;">
+                    <div class="form-group">
+                        <label>生成的内容预览 (您可以直接编辑)</label>
+                        <textarea id="genContentPreview" rows="12"
+                            style="font-family: monospace; font-size: 13px;"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label>技能名称 (建议使用英文，如 create_story)</label>
+                        <input type="text" id="genPatternName" placeholder="例如：create_video_script">
+                    </div>
+                    <div class="form-actions">
+                        <button class="cancel-btn" id="backToStep1">返回修改</button>
+                        <button class="save-btn" id="saveGenBtn">确认保存并启用</button>
+                    </div>
+                </div>
+
+                <div id="genLoading" style="display: none; text-align: center; padding: 40px;">
+                    <span class="loading-dots" style="font-size: 24px;">AI 正在构建中</span>
                 </div>
             </div>
         </div>

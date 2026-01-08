@@ -148,4 +148,87 @@ ${skillsSummary}
     }
 })
 
+// 智能建议相似技能 (用于搜索无结果时)
+router.get('/recommend', (req, res) => {
+    try {
+        const query = req.query.q || ''
+        const suggestions = patternLoader.suggestPatterns(query)
+        res.json({ success: true, data: suggestions })
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message })
+    }
+})
+
+// AI 生成新 Skill 内容
+router.post('/generate', async (req, res) => {
+    try {
+        const { description, referencePattern } = req.body
+        if (!description) {
+            return res.status(400).json({ success: false, error: '请提供需求描述' })
+        }
+
+        const adapter = require('../services/adapter')
+        let refContent = ''
+
+        if (referencePattern) {
+            const ref = patternLoader.getPattern(referencePattern)
+            if (ref) {
+                refContent = `参考模式 (${referencePattern}) 的结构：\n${ref.content}\n\n`
+            }
+        }
+
+        const messages = [
+            {
+                role: 'system',
+                content: `你是一个专业的 Pattern 架构师，专注于编写高质量的 Fabric 风格 Pattern (system.md)。
+你的任务是根据用户的需求描述，生成一个功能强大、结构严谨的 Pattern。
+
+生成的 Pattern 必须遵循以下 [标准结构]：
+1. # IDENTITY and PURPOSE: 极其详尽地描述 AI 的角色、专家身份和核心职责。
+2. Take a step back and think step-by-step... (此行必须原样保留)
+3. # GOALS: 罗列 1-3 个核心交付目标。
+4. # STEPS: 细化的算法或处理逻辑方案。
+5. # OUTPUT INSTRUCTIONS: 格式要求、语调、负面限制。
+6. # INPUT: 固定为 "INPUT:"。
+
+要求：
+- 使用英文编写 Pattern 正文（因为 AI 对英文指令理解更精准）。
+- 语气专业、权威。
+- 只输出 Markdown 内容，不要任何解释或开场白。`
+            },
+            {
+                role: 'user',
+                content: `${refContent}用户需求描述：${description}\n\n请生成对应的 system.md 内容：`
+            }
+        ]
+
+        const content = await adapter.sendRequest(messages)
+        res.json({ success: true, data: content })
+
+    } catch (e) {
+        console.error('[Generate Pattern Error]', e)
+        res.status(500).json({ success: false, error: e.message })
+    }
+})
+
+// 保存生成的 Skill
+router.post('/save', (req, res) => {
+    try {
+        const { name, content } = req.body
+        if (!name || !content) {
+            return res.status(400).json({ success: false, error: '缺少名称或内容' })
+        }
+
+        // 格式化名称：小写，空格换下划线，去除非法字符
+        const safeName = name.toLowerCase()
+            .replace(/\s+/g, '_')
+            .replace(/[^a-z0-9_]/g, '')
+
+        const pattern = patternLoader.savePattern(safeName, content)
+        res.json({ success: true, data: pattern })
+    } catch (e) {
+        res.status(500).json({ success: false, error: e.message })
+    }
+})
+
 module.exports = router
