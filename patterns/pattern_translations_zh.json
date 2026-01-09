@@ -230,5 +230,6 @@
   "write_semgrep_rule": "Semgrep 规则编写：根据输入创建精确工作的 Semgrep 规则。",
   "youtube_summary": "Youtube 视频总结：创建带时间戳的简洁总结，突出关键点。",
   "movie_expert_gen": "分镜专家",
-  "sdxl_": "sdxl 文生图专家"
+  "sdxl_": "sdxl 文生图专家",
+  "产品定义者+系统逻辑逻辑设计师": "产品定义者+系统逻辑逻辑设计师"
 }

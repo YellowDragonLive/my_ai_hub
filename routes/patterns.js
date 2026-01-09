@@ -219,10 +219,11 @@ router.post('/save', (req, res) => {
             return res.status(400).json({ success: false, error: '缺少名称或内容' })
         }
 
-        // 格式化名称：小写，空格换下划线，去除非法字符
-        const safeName = name.toLowerCase()
+        // 格式化名称：小写，空格换下划线，去除非法文件名字符
+        // 允许中文和其他 Unicode 字符
+        const safeName = name.trim().toLowerCase()
             .replace(/\s+/g, '_')
-            .replace(/[^a-z0-9_]/g, '')
+            .replace(/[<>:"/\\|?*\x00-\x1f]/g, '') // 过滤 Windows/Unix 非法文件名字符
 
         const pattern = patternLoader.savePattern(safeName, content, description_zh)
         res.json({ success: true, data: pattern })
